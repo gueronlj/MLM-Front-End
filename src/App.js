@@ -190,7 +190,6 @@ const App = () => {
             <h1>MLM</h1>
             <ul>
             <li className="headerTitle">Welcome {currentUser}</li>
-
             {currentUser=='Guest'?
                <>
                <li><img onClick={openLogin} className = "headerIcon" src = "https://cdn-icons-png.flaticon.com/512/1828/1828395.png" alt="" /></li>
