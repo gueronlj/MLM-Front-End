@@ -31,6 +31,7 @@ const App = () => {
 
    //friends
    const [ friends, setFriends ] = useState([])
+   const [ targetFriend, setTargetFriend ] = useState('')
 
 //==========check for session=======================
    const checkForSession = (name) => {
@@ -257,7 +258,7 @@ const App = () => {
                <LoginForm setCurrentUser={setCurrentUser} setLoginAccepted={setLoginAccepted} setShowLogin={setShowLogin}/>
                :
                 <></>}
-               <Friend currentUser={currentUser} friends={friends}/>
+               <Friend currentUser={currentUser} friends={friends} setFriends={setFriends} targetFriend={targetFriend} setTargetFriend={setTargetFriend}/>
             </div>
          </div>
          <footer>
