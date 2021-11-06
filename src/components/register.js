@@ -17,14 +17,14 @@ const Register = ({setShowRegister}) => {
 //---------------on form submit--------------------------------
    const handleRegistration = (event) => {
       setnewUser(event)
-      axios.post(`http://localhost:3001/users`,
+      axios.post(`https://mlm-backend-chat.herokuapp.com/users`,
          {
             username:newUser,
             password:newPassword,
          }
       ).then(() => {
          axios
-            .get('http://localhost:3001/')
+            .get('https://mlm-backend-chat.herokuapp.com/')
             .then((response) => {
                console.log(response);
             })
