@@ -12,7 +12,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
       event.preventDefault()
       console.log('trying to add friend');
       axios
-         .post(`http://localhost:3001/friends/${currentUser}/${targetFriend}`)
+         .post(`https://mlm-backend-chat.herokuapp.com/friends/${currentUser}/${targetFriend}`)
          .then((response) => {
             console.log('added friend');
             setFriends(response.data.friends)

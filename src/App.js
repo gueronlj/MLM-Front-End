@@ -36,7 +36,7 @@ const App = () => {
 //==========check for session=======================
    const checkForSession = (name) => {
       axios
-         .get(`http://localhost:3001/sessions/find/${name}`)
+         .get(`https://mlm-backend-chat.herokuapp.com/sessions/find/${name}`)
          .then((response) => {
             setFriends(response.data.currentUser[0].friends)
             console.log(response.data);
@@ -55,7 +55,7 @@ const App = () => {
       setCurrentUser(storedData||'Guest');
       checkForSession(currentUser)
       axios
-         .get('http://localhost:3001/chatrooms')
+         .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
          .then((response) => {
             setMessages(response.data)
             })
@@ -76,14 +76,14 @@ const App = () => {
 //==================Send Message Button=========
    const handleSendBtn= (event) => {
       event.preventDefault()
-      axios.post('http://localhost:3001/chatrooms',
+      axios.post('https://mlm-backend-chat.herokuapp.com/chatrooms',
          {
             username:currentUser,
             message:createdMessage,
          }
       ).then(() => {
          axios
-            .get('http://localhost:3001/chatrooms')
+            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
             .then((response) => {
                setMessages(response.data)
                setcreatedMessage('')
@@ -93,10 +93,10 @@ const App = () => {
 //=============Delete message ===============
    const handleDelete = (message) => {
       axios
-         .delete(`http://localhost:3001/chatrooms/${message._id}`)
+         .delete(`https://mlm-backend-chat.herokuapp.com/chatrooms/${message._id}`)
          .then(() => {
             axios
-               .get('http://localhost:3001/chatrooms')
+               .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
                .then((response) => {
                   setMessages(response.data)
                })
@@ -115,7 +115,7 @@ const App = () => {
 
    const handleEditForm = (event) => {
       event.preventDefault()
-      axios.put(`http://localhost:3001/chatrooms/${targetId}`,
+      axios.put(`https://mlm-backend-chat.herokuapp.com/chatrooms/${targetId}`,
          {
             username:createdAuthor||targetAuthor,//if there was nothing typed in the input, use previous value
             message:createdMessage||targetMessage,
@@ -123,7 +123,7 @@ const App = () => {
          }
       ).then(() => {
          axios
-            .get('http://localhost:3001/chatrooms')
+            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
             .then((response) => {
                // console.log(response);
                setMessages(response.data)
@@ -136,13 +136,13 @@ const App = () => {
       editOn?seteditOn(false):seteditOn(true)//edit button is a toggle
       settargetAuthor(message.username)
       settargetMessage(message.message)
-      axios.put(`http://localhost:3001/chatrooms/${message._id}`,
+      axios.put(`https://mlm-backend-chat.herokuapp.com/chatrooms/${message._id}`,
          {
             editOn:editOn
          }
       ).then(() => {
          axios
-            .get('http://localhost:3001/chatrooms')
+            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
             .then((response) => {
                // console.log(response);
                setMessages(response.data)
@@ -154,10 +154,10 @@ const App = () => {
    const handleLike = (message) => {
        settargetId(message._id)
        axios
-        .put(`http://localhost:3001/chatrooms/${message._id}/likes`)
+        .put(`https://mlm-backend-chat.herokuapp.com/chatrooms/${message._id}/likes`)
         .then(() => {
             axios
-            .get('http://localhost:3001/chatrooms')
+            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
             .then((response) => {
                // console.log(response);
                setMessages(response.data)
@@ -168,7 +168,7 @@ const App = () => {
    const handleLogout = () => {
       console.log(`loggin out ${currentUser} `);
        axios
-        .delete(`http://localhost:3001/sessions/${currentUser}`)
+        .delete(`https://mlm-backend-chat.herokuapp.com/sessions/${currentUser}`)
         .then((response) => {
             console.log('you are logged out');
             window.localStorage.removeItem('currentUser');
