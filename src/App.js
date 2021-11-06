@@ -51,7 +51,7 @@ const App = () => {
 //================= on first load ===============
    useEffect(() => {
       const storedData = window.localStorage.getItem('currentUser')
-      setCurrentUser(storedData||'');
+      setCurrentUser(storedData||'Guest');
       checkForSession(currentUser)
       axios
          .get('http://localhost:3001/chatrooms')
@@ -213,6 +213,7 @@ const App = () => {
                            <p>(timestamp here)</p>
                         </div>
                         <div className='cardBody'>
+
                         { message.editOn===true?
                            (<div id="editForm">
                               <form onSubmit={handleEditForm}>
@@ -231,13 +232,15 @@ const App = () => {
                            <img id="likes" src='./like.png' alt="" onClick={(event) => {
                               handleLike(message)
                            }}/>
-                           <img src='./pencil.svg' alt="" onClick={ (event) => {
-                              handleEditButton(message)
-                           } }/>
+                           {currentUser===message.username?
+                               <img src='./pencil.svg' alt="" onClick={ (event) => {
+                                  handleEditButton(message)
+                               } }/>
+                               :
+                               <></>
+                           }
+
                            <img src='./xthin.png' alt="" onClick={ (event) => {
-                              handleDelete(message)
-                           } }/>
-                           <img src='https://cdn-icons.flaticon.com/png/512/3207/premium/3207048.png?token=exp=1636118701~hmac=f2a152612d2afc4c8be561f6948485e5' alt="" onClick={ (event) => {
                               handleDelete(message)
                            } }/>
                         </div>
