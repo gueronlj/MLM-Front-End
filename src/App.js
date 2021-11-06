@@ -230,7 +230,7 @@ const App = () => {
             {currentUser ?
 
                 <>
-                <li className="headerTitle">Welcome {session.currentUser[0].username}</li>
+                <li className="headerTitle">Welcome {currentUser}</li>
                 <li><img id="logout" className = "headerIcon" src = "https://cdn-icons-png.flaticon.com/512/1828/1828395.png" alt="" onClick={handleLogout}/></li>
                 <li><img className = "headerIcon" src = "https://cdn-icons.flaticon.com/png/512/880/premium/880543.png?token=exp=1636076955~hmac=56576c0ed7ab114c3007603f21651ec1" alt="" /></li>
                 </>
