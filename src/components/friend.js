@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend}) => {
+    console.log(friends);
 
    const updateTargetFriend = (event) => {
       setTargetFriend(event.target.value)
@@ -12,7 +13,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
       event.preventDefault()
       console.log('trying to add friend');
       axios
-         .post(`https://mlm-backend-chat.herokuapp.com/friends/${currentUser}/${targetFriend}`)
+         .post(`http://localhost:3001/friends/${currentUser}/${targetFriend}`)
          .then((response) => {
             console.log('added friend');
             setFriends(response.data.friends)
@@ -28,11 +29,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
             </form>
             <ul className = "friendNames">
                 {friends.map((friend) => {
-                    return(
-                        <li key={friend._id}>
-                            {friend.username}
-                        </li>
-                    )
+                    return <li key={friend._id}>{friend.username}</li>
                 })}
             </ul>
         </div>
