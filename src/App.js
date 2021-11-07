@@ -20,6 +20,7 @@ const App = () => {
 
    //Login/Logout
    const [currentUser, setCurrentUser] = useState('')
+   // console.log(currentUser);
    const [loginAccepted, setLoginAccepted] = useState()
 
    //likes
@@ -33,21 +34,27 @@ const App = () => {
    const [ friends, setFriends ] = useState([])
    const [ targetFriend, setTargetFriend ] = useState('')
 
+   // console.log(friends);
+
 //==========check for session=======================
    const checkForSession = (name) => {
-      axios
-         .get(`https://mlm-backend-chat.herokuapp.com/sessions/find/${name}`)
-         .then((response) => {
-            setFriends(response.data.currentUser[0].friends)
-            console.log(response.data);
-            if (response.data.loginAccepted===true){
-               // setCurrentUser(name)
-               return true
-            } else {
-               return false
-            }
-         })
+      console.log(name);
+      if (name){
+          axios
+             .get(`http://localhost:3001/sessions/find/${name}`)
+             .then((response) => {
+                setFriends(response.data.currentUser[0].friends)
+                console.log(response.data);
+                if (response.data.loginAccepted===true){
+                   setCurrentUser(name)
+                   return true
+                } else {
+                   return false
+                }
+             })
+      }
    }
+
 
 //================= on first load ===============
    useEffect(() => {
@@ -55,7 +62,7 @@ const App = () => {
       setCurrentUser(storedData||'Guest');
       checkForSession(currentUser)
       axios
-         .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
+         .get('http://localhost:3001/chatrooms')
          .then((response) => {
             setMessages(response.data)
             })
@@ -67,23 +74,23 @@ const App = () => {
 
    useEffect(() => {
       const storedData = window.localStorage.getItem('currentUser')
-      if(checkForSession(currentUser)==true){
+      if(checkForSession(currentUser)===true){
          setCurrentUser(storedData)
-         console.log(currentUser);
+         // console.log(currentUser);
       }
    },[currentUser])
 
 //==================Send Message Button=========
    const handleSendBtn= (event) => {
       event.preventDefault()
-      axios.post('https://mlm-backend-chat.herokuapp.com/chatrooms',
+      axios.post('http://localhost:3001/chatrooms',
          {
             username:currentUser,
             message:createdMessage,
          }
       ).then(() => {
          axios
-            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
+            .get('http://localhost:3001/chatrooms')
             .then((response) => {
                setMessages(response.data)
                setcreatedMessage('')
@@ -93,10 +100,10 @@ const App = () => {
 //=============Delete message ===============
    const handleDelete = (message) => {
       axios
-         .delete(`https://mlm-backend-chat.herokuapp.com/chatrooms/${message._id}`)
+         .delete(`http://localhost:3001/chatrooms/${message._id}`)
          .then(() => {
             axios
-               .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
+               .get('http://localhost:3001/chatrooms')
                .then((response) => {
                   setMessages(response.data)
                })
@@ -115,7 +122,7 @@ const App = () => {
 
    const handleEditForm = (event) => {
       event.preventDefault()
-      axios.put(`https://mlm-backend-chat.herokuapp.com/chatrooms/${targetId}`,
+      axios.put(`http://localhost:3001/chatrooms/${targetId}`,
          {
             username:createdAuthor||targetAuthor,//if there was nothing typed in the input, use previous value
             message:createdMessage||targetMessage,
@@ -123,7 +130,7 @@ const App = () => {
          }
       ).then(() => {
          axios
-            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
+            .get('http://localhost:3001/chatrooms')
             .then((response) => {
                // console.log(response);
                setMessages(response.data)
@@ -136,13 +143,13 @@ const App = () => {
       editOn?seteditOn(false):seteditOn(true)//edit button is a toggle
       settargetAuthor(message.username)
       settargetMessage(message.message)
-      axios.put(`https://mlm-backend-chat.herokuapp.com/chatrooms/${message._id}`,
+      axios.put(`http://localhost:3001/chatrooms/${message._id}`,
          {
             editOn:editOn
          }
       ).then(() => {
          axios
-            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
+            .get('http://localhost:3001/chatrooms')
             .then((response) => {
                // console.log(response);
                setMessages(response.data)
@@ -154,10 +161,10 @@ const App = () => {
    const handleLike = (message) => {
        settargetId(message._id)
        axios
-        .put(`https://mlm-backend-chat.herokuapp.com/chatrooms/${message._id}/likes`)
+        .put(`http://localhost:3001/chatrooms/${message._id}/likes`)
         .then(() => {
             axios
-            .get('https://mlm-backend-chat.herokuapp.com/chatrooms')
+            .get('http://localhost:3001/chatrooms')
             .then((response) => {
                // console.log(response);
                setMessages(response.data)
@@ -168,7 +175,7 @@ const App = () => {
    const handleLogout = () => {
       console.log(`loggin out ${currentUser} `);
        axios
-        .delete(`https://mlm-backend-chat.herokuapp.com/sessions/${currentUser}`)
+        .delete(`http://localhost:3001/sessions/${currentUser} `)
         .then((response) => {
             console.log('you are logged out');
             window.localStorage.removeItem('currentUser');
@@ -191,7 +198,7 @@ const App = () => {
             <h1>MLM</h1>
             <ul>
             <li className="headerTitle">Welcome {currentUser}</li>
-            {currentUser=='Guest'?
+            {currentUser==='Guest'?
                <>
                <li><img onClick={openLogin} className = "headerIcon" src = "https://cdn-icons-png.flaticon.com/512/1828/1828395.png" alt="" /></li>
                <li><img onClick={openRegister} className = "headerIcon" src = "https://cdn-icons-png.flaticon.com/512/1277/1277010.png" alt="" /></li>
