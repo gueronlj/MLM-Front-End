@@ -5,14 +5,13 @@ import axios from 'axios'
 const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend}) => {
     console.log(friends);
 
-    const [friendListName, setFriendListName] = useState('')
-    console.log(friendListName);
+    const [deleteTarget, setDeleteTarget] = useState()
 
     const updateTargetFriend = (event) => {
         setTargetFriend(event.target.value)
     }
 
-   const handleAddFriend = (event, friend) => {
+   const handleAddFriend = (event) => {
       event.preventDefault()
       console.log('trying to add friend');
       axios
@@ -20,7 +19,6 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
          .then((response) => {
             console.log('added friend');
             setFriends(response.data.friends)
-            // setFriendListName(friend._id)
          })
    }
 
@@ -28,7 +26,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
        event.preventDefault()
        console.log('trying to delete friend');
        axios
-            .put(`http://localhost:3001/friends/${currentUser}/${friendListName}`)
+            .put(`http://localhost:3001/friends/${currentUser}/${deleteTarget}`)
             .then(() => {
                 console.log('friend was deleted');
             })
