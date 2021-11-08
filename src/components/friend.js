@@ -27,9 +27,9 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
                Search user:<input type='text' onChange={updateTargetFriend}/>
                <input type='submit' value='Add Friend'/>
             </form>
-            <ul className = "friendNames">
+            <ul>
                 {friends.map((friend) => {
-                    return <li key={friend._id}>{friend.username}</li>
+                    return <li className = "friendNames" key={friend._id}>{friend.username}</li>
                 })}
             </ul>
         </div>
