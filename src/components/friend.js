@@ -44,7 +44,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
                     return (
                         <div key={friend._id} className="friendCard">
                             <li className = "friendNames" >{friend.username}</li>
-                            <img className="friendDelete" src ="https://cdn-icons.flaticon.com/png/512/4922/premium/4922255.png?token=exp=1636339728~hmac=7f7c48b4c19b2860ff28bd06f22bfebb"/>
+                            <img className="friendDelete" src ="./deletefriend.png"/>
                         </div>
                     )
                 })}
