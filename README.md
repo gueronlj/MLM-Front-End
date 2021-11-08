@@ -1,70 +1,74 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# MLM app
+A full-stack SPA build using MERN
+_________________________________________________________________________________________
+##Key Features
+### Messaging
+For now, messages will be stored and viewed in a 'common space' that all other users can see. A user can edit or remove a message in this space as long as they are the author of the message.
+-------------------------------------------------------------------------------
+### Users/'Sessions'
+We want to be able to have users log in and have their own friends list and maybe private messages. Without express.sessions we needed to create a new way to manage user 'sessions'.
+1. When a user logs in, a session will be created with their name. This object will have a current user (another object), a name(same as current user) and a boolean property (online or offline.
+2. When a user logs in, their name will be kept in local storage until they log out.
+3. On load, check the name in local storage and retrieve the matching session info.
+------------------------------------------------------------------------------------
+###Friends List
+#### Add friend:
+Every user object has an array called 'friends'. On click, the 'add friend' button will make an axios call to search for a user with the given name and push that found user into the current user's 'friends array'
+#### Remove friend:
+We will make a similar axios call as 'Add friend' except we will use the splice method to remove the friend from the array. To splice the correct index, we will use a function to find the index of 'friends array' with a matching name of the friend we want to remove.
+__________________________________________________________________________________________
+##Current Bugs:
+###CORS:
+Some systems get CORS errors, others do not. A chrome extension can be installed on a problem system to fix the error. If the CORS error is not fixed that system will not be able to use the app.
+###Friends List:
+A user's friends seem to 'disappear' on refresh but the correct data for the friends array is still there.
+###Remove Friend:
+The remove friend function is not splicing the right user out. It always picks index [0].
+###Login Functionality
+The application is able to verify if the username exists within the database, but it is unable to check whether the password matches with the user password in the User database.
+_____________________________________________________________________________________
+##User Stories:
+-A user's message should be displayed in a public space where other users can see it.
+-Users should be able to post/edit/remove a message they create.
+-A user can log in and out and their session should persist through a refresh.
+-A user should have a friends list where they can add/remove other users
+-A user can send a private message or 'whisper' to a friend.
+-The friends list should only appear when activated, and only be available to a registered user.
+_______________________________________________________________________________
+##Challenges:
+###Keeping the important data on refresh.
+###Heroku Deployment
+__________________________________________________________________________
+## Notes:
+####Issue: 'session' info is lost on refresh.
+####Solution??: Somehow store the session state in local storage.
+On login, user gains a session object
+Session = {
+   name: String,
+   online: Boolean
+}
+const = [online, setOnline] = useState('false')
+OnLogin => make axios call to findOneAndUpdate({username},
+   session:{
+      name:username from login form,
+      online:true
+   }
+   setOnline(true)
+   *On login, save online state to local storage
+OnLogout => make axios call to findOneAndUpdate({username},
+   session:{
+      name:Username,
+      online:false
+   }
+   setOnline(false)
+useEffect( retrieve online state from local storage )
+online ? show logout button : show login button
+------------------------------------------------------------------------------
+const checkStatus = (NAME) => {
+//find a session with this NAME;
+   if foundSession.online == true,
+      return true'
+   else
+      return false
+}
+checkStatus(username)? Print Welcome username! :

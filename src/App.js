@@ -217,7 +217,6 @@ const App = () => {
                         <div key={message._id} className="card">
                         <div className='cardTop'>
                             <h5>{message.username}</h5>
-                            <p>(timestamp here)</p>
                         </div>
                         <div className='cardBody'>
                             {message.editOn===true?
