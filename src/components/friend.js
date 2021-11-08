@@ -24,11 +24,11 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
 
    const handleDeleteFriend = (event) => {
        event.preventDefault()
-       console.log('trying to delete friend');
        axios
-            .put(`https://mlm-backend-chat.herokuapp.com/friends/${currentUser}/${deleteTarget}`)
-            .then(() => {
-                console.log('friend was deleted');
+            .put(`https://mlm-backend-chat.herokuapp.com/friends/${currentUser}/${event.target.value}`)
+            .then((response) => {
+                console.log('friend was removed');
+                setFriends(response.data.friends)
             })
    }
 
@@ -44,7 +44,10 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
                     return (
                         <div key={friend._id} className="friendCard">
                             <li className = "friendNames" >{friend.username}</li>
-                            <img className="friendDelete" src ="./deletefriend.png"/>
+                            <form onSubmit={handleDeleteFriend}>
+                              <input type='hidden' value={friend.username}/>
+                              <input type='submit'value="Remove"/>
+                            </form>
                         </div>
                     )
                 })}
