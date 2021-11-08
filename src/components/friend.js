@@ -15,7 +15,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
       event.preventDefault()
       console.log('trying to add friend');
       axios
-         .post(`http://localhost:3001/friends/${currentUser}/${targetFriend}`)
+         .post(`https://mlm-backend-chat.herokuapp.com/friends/${currentUser}/${targetFriend}`)
          .then((response) => {
             console.log('added friend');
             setFriends(response.data.friends)
@@ -26,7 +26,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
        event.preventDefault()
        console.log('trying to delete friend');
        axios
-            .put(`http://localhost:3001/friends/${currentUser}/${deleteTarget}`)
+            .put(`https://mlm-backend-chat.herokuapp.com/friends/${currentUser}/${deleteTarget}`)
             .then(() => {
                 console.log('friend was deleted');
             })

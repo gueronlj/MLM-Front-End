@@ -20,12 +20,12 @@ const LoginForm = ({setCurrentUser, setLoginAccepted, session, setShowLogin}) =>
    const handleLogin = (event) => {
       event.preventDefault()
       axios //pass login credentials to get checked.
-         .get(`http://localhost:3001/sessions/login/${username}/${password}`)
+         .get(`https://mlm-backend-chat.herokuapp.com/sessions/login/${username}/${password}`)
          .then(() => {
             console.log('sending credentials');
          })
       axios//pass name of session to create.
-         .post(`http://localhost:3001/sessions/${username}`)
+         .post(`https://mlm-backend-chat.herokuapp.com/sessions/${username}`)
          .then(() => {
             console.log('Trying to create session');
             setLoginAccepted(true)
@@ -36,11 +36,11 @@ const LoginForm = ({setCurrentUser, setLoginAccepted, session, setShowLogin}) =>
 
   // const handleLogin = () => {
   //     axios
-  //      .get('http://localhost:3001/users')
+  //      .get('https://mlm-backend-chat.herokuapp.com//users')
   //      .then((response) => {
   //          console.log(response);
   //          axios
-  //          .put(`http://localhost:3001/users/login/${username}`)
+  //          .put(`https://mlm-backend-chat.herokuapp.com//users/login/${username}`)
   //          .then(() => {
   //              console.log('you are logged in');
   //          })
