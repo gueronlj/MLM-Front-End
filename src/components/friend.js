@@ -3,7 +3,6 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 
 const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend}) => {
-    console.log(friends);
 
     const [deleteTarget, setDeleteTarget] = useState()
 
@@ -32,6 +31,10 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
             })
    }
 
+   // <img className = "friendDelete" src = "./deletefriend.png"/>
+
+
+
     return (
         <div className = "friendList">
             <h2>Friends List</h2>
@@ -45,7 +48,7 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
                         <div key={friend._id} className="friendCard">
                             <li className = "friendNames" >{friend.username}</li>
                             <form onSubmit={handleDeleteFriend}>
-                              <input type='hidden' value={friend.username}/>
+                              <input type='hidden' value={friend._id}/>
                               <input type='submit'value="Remove"/>
                             </form>
                         </div>
