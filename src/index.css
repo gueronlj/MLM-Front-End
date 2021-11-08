@@ -214,3 +214,16 @@ footer{
     width: 24vw;
     height: 100%;
 }
+
+.friendNames {
+    list-style: none;
+    text-align: center;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid silver;
+    border-radius: 5px;
+    width: 20vw;
+    padding: 1% 0 1% 0;
+    box-shadow: 5px 5px 5px black;
+    margin-bottom: 3%;
+}
