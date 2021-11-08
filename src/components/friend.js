@@ -4,9 +4,11 @@ import axios from 'axios'
 
 const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend}) => {
 
-   const updateTargetFriend = (event) => {
-      setTargetFriend(event.target.value)
-   }
+    const [deleteTarget, setDeleteTarget] = useState()
+
+    const updateTargetFriend = (event) => {
+        setTargetFriend(event.target.value)
+    }
 
    const handleAddFriend = (event) => {
       event.preventDefault()
@@ -19,6 +21,20 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
          })
    }
 
+   const handleDeleteFriend = (event) => {
+       event.preventDefault()
+       axios
+            .put(`https://mlm-backend-chat.herokuapp.com/friends/${currentUser}/${event.target.value}`)
+            .then((response) => {
+                console.log('friend was removed');
+                setFriends(response.data.friends)
+            })
+   }
+
+   // <img className = "friendDelete" src = "./deletefriend.png"/>
+
+
+
     return (
         <div className = "friendList">
             <h2>Friends List</h2>
@@ -26,12 +42,16 @@ const Friend = ({currentUser, friends, setFriends, targetFriend, setTargetFriend
                Search user:<input type='text' onChange={updateTargetFriend}/>
                <input type='submit' value='Add Friend'/>
             </form>
-            <ul className = "friendNames">
+            <ul>
                 {friends.map((friend) => {
-                    return(
-                        <li key={friend._id}>
-                            {friend.username}
-                        </li>
+                    return (
+                        <div key={friend._id} className="friendCard">
+                            <li className = "friendNames" >{friend.username}</li>
+                            <form onSubmit={handleDeleteFriend}>
+                              <input type='hidden' value={friend._id}/>
+                              <input type='submit'value="Remove"/>
+                            </form>
+                        </div>
                     )
                 })}
             </ul>

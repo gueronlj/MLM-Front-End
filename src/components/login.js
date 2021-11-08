@@ -36,11 +36,11 @@ const LoginForm = ({setCurrentUser, setLoginAccepted, session, setShowLogin}) =>
 
   // const handleLogin = () => {
   //     axios
-  //      .get('https://mlm-backend-chat.herokuapp.com/users')
+  //      .get('https://mlm-backend-chat.herokuapp.com//users')
   //      .then((response) => {
   //          console.log(response);
   //          axios
-  //          .put(`https://mlm-backend-chat.herokuapp.com/users/login/${username}`)
+  //          .put(`https://mlm-backend-chat.herokuapp.com//users/login/${username}`)
   //          .then(() => {
   //              console.log('you are logged in');
   //          })
