@@ -1,7 +1,4 @@
 # MLM app
-
-A full-stack SPA build using MERN
-_________________________________________________________________________________________
 ##Key Features
 
 A full-stack SPA build using MERN
