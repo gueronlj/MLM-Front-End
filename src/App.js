@@ -43,10 +43,10 @@ const App = () => {
           axios
              .get(`https://mlm-backend-chat.herokuapp.com/sessions/find/${name}`)
              .then((response) => {
-                setFriends(response.data.currentUser[0].friends)
                 console.log(response.data);
-                if (response.data.loginAccepted===true){
+                if (response.data){
                    setCurrentUser(name)
+                   setFriends(response.data.currentUser[0].friends)
                    return true
                 } else {
                    return false
@@ -227,7 +227,7 @@ const App = () => {
                                     </form>
                                 </div>):
                                 (<>
-                                    <p>{message.message}</p>
+                                    <p className='message'>{message.message}</p>
                                     </>)
                             }
                         </div>
