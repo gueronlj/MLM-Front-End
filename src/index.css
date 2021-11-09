@@ -79,6 +79,10 @@ header li{
    padding-left: 2em;
 }
 
+.message{
+   font-family: Helvetica
+}
+
 footer{
    display: flex;
    flex-direction: column;
@@ -107,6 +111,10 @@ footer{
 
 .cardLower >*{
    margin: 1em;
+}
+
+.cardLower p{
+   font-size: .9em;
 }
 
 .cardTop{
@@ -143,6 +151,8 @@ footer{
 
 .card h5{
    margin-bottom: 0;
+   color:cornflowerblue;
+   font-size: 1.2em;
 }
 
 .loginForm {
@@ -217,10 +227,10 @@ footer{
 
 .friendCard {
     display: flex;
-    align-items: center;
+    align-items: baseline;
 }
 
-.friendNames {
+.friendNames, .friendRmvBtn {
     list-style: none;
     text-align: center;
     text-align: center;
@@ -233,9 +243,26 @@ footer{
     margin-bottom: 3%;
 }
 
-.friendDelete {
+.friendDelete, .friendRmvBtn {
     border: none;
     margin-left: 10%;
     background: white;
     height: 3vh;
+}
+
+.friendRmvBtn{
+   width:2em;
+   font-size: 1.5em;
+   padding-left: .05em;
+   padding-right: .05em;
+   font-weight: bold;
+}
+
+.friendList ul{
+   padding-inline-start:0px;
+}
+
+#friendSearch{
+   display: flex;
+   flex-direction: column;
 }
