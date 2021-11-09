@@ -1,5 +1,5 @@
 # MLM app
-##Key Features
+## Key Features
 
 A full-stack SPA build using MERN
 _______________________________________________________________________________________
@@ -16,7 +16,7 @@ We want to be able to have users log in and have their own friends list and mayb
 
 3. On load, check the name in local storage and retrieve the matching session info.
 ------------------------------------------------------------------------------------
-###Friends List
+### Friends List
 
 #### Add friend:
 Every user object has an array called 'friends'. On click, the 'add friend' button will make an axios call to search for a user with the given name and push that found user into the current user's 'friends array'
@@ -32,15 +32,15 @@ Every user object has an array called 'friends'. On click, the 'add friend' butt
 #### Remove friend:
 We will make a similar axios call as 'Add friend' except we will use the splice method to remove the friend from the array. To splice the correct index, we will use a function to find the index of 'friends array' with a matching name of the friend we want to remove.
 __________________________________________________________________________________________
-##Current Bugs:
+## Current Bugs:
 
-###CORS:
+### CORS:
 Some systems get CORS errors, others do not. A chrome extension can be installed on a problem system to fix the error. If the CORS error is not fixed that system will not be able to use the app.
 
-###Friends List:
+### Friends List:
 A user's friends seem to 'disappear' on refresh but the correct data for the friends array is still there.
 _____________________________________________________________________________________
-##User Stories:
+## User Stories:
 -A user's message should be displayed in a public space where other users can see it.
 
 -Users should be able to post/edit/remove a message they create.
@@ -53,25 +53,25 @@ ________________________________________________________________________________
 
 -The friends list should only appear when activated, and only be available to a registered user.
 _______________________________________________________________________________
-##Challenges:
+## Challenges:
 
-###Keeping the important data on refresh.
+### Keeping the important data on refresh.
 
-###Heroku Deployment
+### Heroku Deployment
 
 =======
-###CORS:
+### CORS:
 Some systems get CORS errors, others do not. A chrome extension can be installed on a problem system to fix the error. If the CORS error is not fixed that system will not be able to use the app.
-###Friends List:
+### Friends List:
 A user's friends seem to 'disappear' on refresh but the correct data for the friends array is still there.
-###Remove Friend:
+### Remove Friend:
 The remove friend function is not splicing the right user out. It always picks index [0].
-###Login Functionality
+### Login Functionality
 The application is able to verify if the username exists within the database, but it is unable to check whether the password matches with the user password in the User database.
 __________________________________________________________________________
 ## Notes:
-####Issue: 'session' info is lost on refresh.
-####Solution??: Somehow store the session state in local storage.
+#### Issue: 'session' info is lost on refresh.
+#### Solution??: Somehow store the session state in local storage.
 
 On login, user gains a session object
 
